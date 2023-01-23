@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-# from .models import Cart, Products, CartItem
+from .models import Customer
+from django.http import HttpResponse
 
 # def login(request):
 #     if request.method == "GET":
@@ -25,5 +26,35 @@ def login(request):
     return render(request, 'login.html')
 
 
+
 def signup(request):
-    return render(request, 'signup.html')
+    if request.method == 'GET':
+        return render(request, 'store/signup.html')
+    else:
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        customer = Customer(first_name=first_name, last_name=last_name, phone=phone, email=email, password=password)
+        err_msg = None
+
+        if not first_name:
+            err_msg = "First Name Required."
+        elif len(first_name) < 3:
+            err_msg = "First Name must be 3 characters long."
+        elif not last_name:
+            err_msg = "Last Name Required."
+        elif len(last_name) < 3:
+            err_msg = "Last Name must be 3 characters long."
+        elif not phone:
+            err_msg = "Phone is Required."
+        elif len(phone) < 10:
+            err_msg = "Phone Number must be 10 characters long."
+        elif not email:
+            err_msg = "Email is Required."
+        if not err_msg:
+            customer.save()
+            return HttpResponse("<h3>Signup Successful</h3>")
+        else:
+            return render(request, 'store/signup.html', {'error_msg': err_msg})

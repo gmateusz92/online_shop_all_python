@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,39 +8,10 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Ecommerce</title>
     <style>
 
-
-        a{
-        font-size: 15px;
-        }
-
-        a:hover{
-            transition: transform .6s ease;
-            transform: scale(1.1);
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-            border: none;
-            color: rgb(229, 159, 159);
-            background: #FF0000 !important;
-                }
-        body{
-            background-color: #6c1515;
-
-        }
-        .hover_img{
-        transition: transform .5s ease;
-        }
-        .hover_img:hover{
-            transform: scale(1.05);
-        }
-        #popup_modal{
-        max-width: 1000px;
-        margin-top: 0px;
-        }
 
     </style>
 </head>
@@ -57,7 +29,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">Store</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="">Cart</a>
+            </li>
         </ul>
+        
 
         <ul class="navbar-nav my-2 my-lg-0">
             <li class="nav-item">
@@ -66,10 +42,10 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="">Signup</a>
+                <a class="nav-link text-white" href="{% url 'signup' %}">Signup</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="">Login</a>
+                <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
             </li>
         </ul>
 
