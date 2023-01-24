@@ -37,6 +37,14 @@ def signup(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         customer = Customer(first_name=first_name, last_name=last_name, phone=phone, email=email, password=password)
+
+        values = {
+            'firstname': first_name,# cos nie dziala
+            'lastname': last_name,
+            'phone': phone,
+            'email': email,
+        }
+
         err_msg = None
 
         if not first_name:
@@ -53,8 +61,11 @@ def signup(request):
             err_msg = "Phone Number must be 10 characters long."
         elif not email:
             err_msg = "Email is Required."
+            return HttpResponse("<h3>succcccck</h3>")
         if not err_msg:
             customer.save()
-            return HttpResponse("<h3>Signup Successful</h3>")
+            #return redirect('index')
+            return HttpResponse("<h3>success</h3>")
         else:
-            return render(request, 'store/signup.html', {'error_msg': err_msg})
+            return render(request, 'store/signup.html', {'error_msg': err_msg, 'values': values})
+            #return HttpResponse("<h3>xxxx</h3>")
