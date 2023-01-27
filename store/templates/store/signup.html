@@ -15,27 +15,28 @@
                             {{ error_msg }}
                         </div>
                 {% endif %}
+                
                 <div class="form-group">
                     <label for="firstname">Firstname</label>
-                    <input type="text" value="{{value.first_name}}" name="firstname" class="form-control" placeholder="Firstname">
+                    <input type="text" value="{{values.firstname}}" name="firstname" class="form-control" placeholder="Firstname">
                 </div>
                 <div class="form-group">
                     <label for="lastname">Lastname</label>
-                    <input type="text" value="{{value.last_name}}" name="lastname" class="form-control" placeholder="Lastname">
+                    <input type="text" value="{{values.lastname}}" name="lastname" class="form-control" placeholder="Lastname">
                 </div>
                 <div class="form-group">
                     <label for="lastname">Phone Number</label>
-                    <input type="text" value="{{value.phone}}" name="phone" class="form-control" placeholder="Phone number">
+                    <input type="text" value="{{values.phone}}" name="phone" class="form-control" placeholder="Phone number">
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" value="{{value.email}}" name="email" class="form-control" placeholder="Enter your email">
+                    <input type="email" value="{{values.email}}" name="email" class="form-control" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">
                 </div>
-
+                
                 {% if messages %}
                     {% for message in messages %}
                         <h6 class="text-white">{{message}}</h6>

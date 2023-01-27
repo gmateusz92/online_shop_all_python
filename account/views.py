@@ -38,7 +38,7 @@ def signup(request):
         password = request.POST.get('password')
         customer = Customer(first_name=first_name, last_name=last_name, phone=phone, email=email, password=password)
 
-        values = {
+        values = { #wyswietla wartosci zapisane w formularzu po wypelnieniu i odswiezeniu nie znikaja
             'firstname': first_name,# cos nie dziala
             'lastname': last_name,
             'phone': phone,
@@ -62,6 +62,8 @@ def signup(request):
         elif not email:
             err_msg = "Email is Required."
             return HttpResponse("<h3>succcccck</h3>")
+        elif customer.does_exits():
+            err_msg = "User with this email address already registered."    
         if not err_msg:
             customer.save()
             #return redirect('index')

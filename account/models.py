@@ -10,5 +10,5 @@ class Customer(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
 
-    def does_exits(self):
+    def does_exits(self): #sprawdza czy dany email juz nie zostal zarejestrowany
         return Customer.objects.filter(email=self.email)    
