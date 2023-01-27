@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Customer
 from django.http import HttpResponse
+from django.contrib.auth.hashers import make_password, check_password
 
 # def login(request):
 #     if request.method == "GET":
@@ -65,6 +66,7 @@ def signup(request):
         elif customer.does_exits():
             err_msg = "User with this email address already registered."    
         if not err_msg:
+            customer.password = make_password(customer.password) #do zapisania hasla w formie hash (importuje make password)
             customer.save()
             #return redirect('index')
             return HttpResponse("<h3>success</h3>")
