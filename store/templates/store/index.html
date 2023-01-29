@@ -4,7 +4,7 @@
 
 {% block content %}
 {% load static %}
-
+{% load cart %}
 
 
     
@@ -58,6 +58,7 @@
                             $ {{ product.price }}
                         </div>
                         <a href="{{ product.id }}" class="btn btn-warning">View</a>
+                        {{product|is_in_cart:request.session.cart}}
                         <form method="post" action="/">
                             {% csrf_token %}
                             <input type="text" value="{{product.id}}" name="product">
