@@ -91,7 +91,7 @@ def home(request):
     if category_id:
         products = Products.objects.filter(category=category_id)
     else:
-        products = Products.objects.filter(category=1)
+        products = Products.objects.all
     context = {'products': products, 'categories': categories}
     return render(request, 'store/home.html', context)
 
