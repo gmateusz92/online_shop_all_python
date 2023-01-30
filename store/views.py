@@ -121,9 +121,9 @@ def home(request):
         category_id = request.GET.get('category')
         if category_id:
             products = Products.objects.filter(category=category_id) #sortuje produkty wedlug kategorii
-            paginator = Paginator(products,1)
-            page = request.GET.get('page')
-            products = paginator.get_page(page)    
+            # paginator = Paginator(products,1)
+            # page = request.GET.get('page')
+            # products = paginator.get_page(page)    
 
         else:
             products = Products.objects.all #sortuje domyslnie
