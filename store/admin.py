@@ -4,9 +4,9 @@ from .models import Products, Category
 from django.utils.html import format_html
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'category'] #wyswietla w panelu admina
-    search_fields = ['title']
-    list_filter = ['title']
+    list_display = ['name', 'price', 'category'] #wyswietla w panelu admina
+    search_fields = ['name']
+    list_filter = ['name']
 
     def image_tag(self, obj): #wyswietla maly obrazek itemu w panelu admina
         return format_html('<img src="{}" width="auto" height="200px" />'.format(obj.image.url))

@@ -46,13 +46,13 @@
 
 
         <div class="row">
-            {% for product in product_objects %}
+            {% for product in products%}
             <div class="col-md-3">
                 <div class="card">
                     <img src="{{ product.image.url }}" alt="card-img-top">
                     <div class="card-body">
                         <div class="card-title">
-                            {{ product.title }}
+                            {{ product.name }}
                         </div>
                         <div class="card-text">
                             $ {{ product.price }}

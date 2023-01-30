@@ -85,14 +85,60 @@ def detail(request, id):
     return render(request, 'store/detail.html', {'product_object':product_object})
 
 def home(request):
-    products = None
-    categories = Category.objects.all()
-    category_id = request.GET.get('category')
-    if category_id:
-        products = Products.objects.filter(category=category_id)
+    if request.method == 'POST':
+        product = request.POST.get('product')
+        remove = request.POST.get('remove')
+        cart = request.session.get('cart')
+        if cart: #jesli koszyk zostal utworzony
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(product)
+                    else:
+                        cart[product] = quantity - 1
+                else:
+                    cart[product] = quantity + 1
+            else:
+                cart[product] = 1
+        else:
+            cart = {}
+            cart[product] = 1
+
+        request.session['cart'] = cart
+        print(request.session['cart'])
+        return redirect('home')
+
     else:
-        products = Products.objects.all
-    context = {'products': products, 'categories': categories}
-    return render(request, 'store/home.html', context)
+
+        cart = request.session.get('')
+        if not cart:
+            request.session.cart = {}
+
+        products = None
+        product_objects = Products.objects.all()
+        categories = Category.objects.all()
+        category_id = request.GET.get('category')
+        if category_id:
+            products = Products.objects.filter(category=category_id) #sortuje produkty wedlug kategorii
+            paginator = Paginator(products,1)
+            page = request.GET.get('page')
+            products = paginator.get_page(page)    
+
+        else:
+            products = Products.objects.all #sortuje domyslnie
+            
+        
+        #paginator code
+        paginator = Paginator(products,1)
+        page = request.GET.get('page')
+        products = paginator.get_page(page)
 
 
+        context = {'products': products, 'categories': categories }
+        print("Your Email Address is: ", request.session.get('email'))
+
+        return render(request, 'store/home.html', context,)    
+        
+
+ 

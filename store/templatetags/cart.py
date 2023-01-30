@@ -10,6 +10,14 @@ def is_in_cart(product, cart):
             return True
     return False
 
+@register.filter(name='cart_quantity')
+def cart_quantity(product, cart):
+    keys = cart.keys()
+    for id in keys:
+        if int(id) == product.id:
+            return cart.get(id)
+    return 0    
+
 # Użyliśmy dekoratora rejestru, aby sprawdzić, czy produkt znajduje się w koszyku, czy nie.
 #  Najpierw chwytamy wszystkie klucze do wózka. Kluczem tutaj jest identyfikator produktu.
 #  A jeśli wartość całkowita tego identyfikatora jest równa identyfikatorowi produktu,
